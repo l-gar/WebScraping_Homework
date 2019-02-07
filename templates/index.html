@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Home Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Local style sheet -->
+    <!-- <link rel="stylesheet" type="text/css" href="stylesheet.css"> -->
+
+    <!-- external reference sheets -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    
+    <!-- Previous projects external Style sheets for JS code may test later to delete or not-->
+    <!-- It also appears that order of these matter **Maybe**-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</head>
+<style>
+    body {
+        background-color: #e8e8f3;
+        opacity: 80%;
+    }
+</style>
+
+<body>
+    <body>
+        
+        <div class="container-fluid">
+            <div class="jumbotron text-center">
+                <h1>Mission to Mars</h1>
+                <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+            </div>
+        </div>
+        <div class="container-fluid">
+            {% for data in mars %}
+            <!-- <img src="{{ data.featured_image }}" alt="featured image"> -->
+            <h2>This is the latest Mars news.</h2>
+            <h4> {{ data.news_title }}</h4>
+            <p> {{data.summary}} </p>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 big_box">
+                    <h2>This is the featured image from JPL.</h2>
+                    <img src="{{data.featured_image}}" alt="Mars featured image" width="80%" height="80%"/>
+                </div>
+          
+                <div class="col-md-4">
+                    <div class="row weather-box">
+                        <div class="col-md-12">
+                            <h3>The current weather on Mars</h3>
+                            <p>
+                                {{data.mars_weather}}
+                            </p>
+                        </div>
+                    </div>
+          
+                    <div class="col-md-12">
+                        <h3>Mars facts</h3>
+                        {{data.mars_table|safe}}
+                        <a href="{{data.mars_table}}"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+             <div class="jumbotron">
+                <h1>Mars Hemispheres</h1>
+          
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{{data.mars_hemispheres[0]['url']}}" alt="Mars Hemisphere1" style="width:400px;height:400px;border:0;">
+                        <h3>{{data.mars_hemispheres[0]['Title']}}</h3>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="{{data.mars_hemispheres[1]['url']}}" alt="Mars Hemisphere2" style="width:400px;height:400px;border:0;">
+                        <h3>{{data.mars_hemispheres[1]['Title']}}</h3>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="{{data.mars_hemispheres[2]['url']}}" alt="Mars Hemisphere1" style="width:400px;height:400px;border:0;">
+                            <h3>{{data.mars_hemispheres[2]['Title']}}</h3>
+                        </div>
+                    <div class="col-md-6">
+                        <img src="{{data.mars_hemispheres[3]['url']}}" alt="Mars Hemisphere2" style="width:400px;height:400px;border:0;">
+                        <h3>{{data.mars_hemispheres[3]['Title']}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+      </body>
+</body>
+</html>
